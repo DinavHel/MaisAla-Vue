@@ -64,7 +64,6 @@ export default {
           })
       this.$store.commit('setIsLoading', false)
     },
-    /*
     addToCart() {
       if (isNaN(this.quantity) ||this.quantity < 1) {
         this.quantity = 1
@@ -86,8 +85,6 @@ export default {
         position: 'bottom-right',
       })
     }
-
-     */
   }
 }
 </script>
