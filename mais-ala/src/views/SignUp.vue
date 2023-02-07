@@ -70,7 +70,7 @@ export default {
         this.errors.push('The password is too short')
       }
 
-      if(this.password !== password2) {
+      if(this.password !== this.password2) {
         this.errors.push('The passwords don\'t match')
       }
 
@@ -81,7 +81,7 @@ export default {
         }
 
         axios
-            .post("/api/v1/users", formData)
+            .post("/api/v1/users/", formData)
             .then(response => {
               toast({
                 message: 'Account created, please log in!',

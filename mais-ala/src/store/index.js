@@ -9,8 +9,6 @@ export default createStore({
     token: '',
     isLoading: false
   },
-  getters: {
-  },
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('cart')) {
@@ -19,7 +17,7 @@ export default createStore({
         localStorage.setItem('cart', JSON.stringify(state.cart))
       }
 
-      if(localStorage.getItem('token')) {
+      if (localStorage.getItem('token')) {
         state.token = localStorage.getItem('token')
         state.isAuthenticated = true
       } else {
@@ -29,7 +27,6 @@ export default createStore({
     },
     addToCart(state, item) {
       const exists = state.cart.items.filter(i => i.product.id === item.product.id)
-
       if (exists.length) {
         exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
       } else {
@@ -39,7 +36,7 @@ export default createStore({
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
     setIsLoading(state, status) {
-      state.setIsLoading = status
+      state.isLoading = status
     },
     setToken(state, token) {
       state.token = token
@@ -53,7 +50,7 @@ export default createStore({
       state.cart = { items: [] }
 
       localStorage.setItem('cart', JSON.stringify(state.cart))
-    }
+    },
   },
   actions: {
   },

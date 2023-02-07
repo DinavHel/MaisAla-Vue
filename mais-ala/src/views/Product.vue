@@ -57,10 +57,10 @@ export default {
           .then(response => {
             this.product = response.data
 
-            document.title = response.product.name + ' | Djackets'
+            document.title = response.product.name + ' | Máis Alá'
           })
           .catch(error => {
-            connsole.log(error)
+            console.log(error)
           })
       this.$store.commit('setIsLoading', false)
     },
