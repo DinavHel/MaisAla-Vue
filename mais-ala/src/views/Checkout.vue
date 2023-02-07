@@ -109,7 +109,7 @@
         <template v-if="cartTotalLength">
           <hr>
 
-          <button class="button is-dark" @click="submitForm">Pay with Stripe</button>
+          <button class="button is-dark">Pay with Stripe</button>
         </template>
       </div>
     </div>
@@ -139,21 +139,17 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Checkout | Djackets'
+    document.title = 'Checkout | Máis Alá'
 
     this.cart = this.$store.state.cart
 
     if(this.cartTotalLength > 0) {
-      this.stripe = Stripe()
-      const elements = this.stripe.elements();
-      this.card = elements.create('card', { hidePostalCode: true })
-
       this.card.mount('#card-element')
     }
   },
   methods: {
     getiItemTotal(item) {
-      return irem.quantity * item.product.price
+      return item.quantity * item.product.price
     },
     submitForm() {
       if (this.first_name === '') {

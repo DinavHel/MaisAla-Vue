@@ -1,6 +1,6 @@
 <template>
   <div class="page-cart">
-    <div class="columns is multiline">
+    <div class="columns is-multiline">
       <div class="column is-12">
         <h1 class="title">Cart</h1>
       </div>
@@ -16,6 +16,7 @@
             <th></th>
           </tr>
           </thead>
+
           <tbody>
           <CartItem
               v-for="item in cart.items"
@@ -25,7 +26,7 @@
           </tbody>
         </table>
 
-        <p v-else>You don't have products in your cart...</p>
+        <p v-else>You don't have any products in your cart...</p>
       </div>
 
       <div class="column is-12 box">
@@ -33,7 +34,7 @@
 
         <strong>${{ cartTotalPrice.toFixed(2) }}</strong>, {{ cartTotalLength }} items
 
-        <hr/>
+        <hr>
 
         <router-link to="/cart/checkout" class="button is-dark">Proceed to checkout</router-link>
       </div>
@@ -44,6 +45,7 @@
 <script>
 import axios from 'axios'
 import CartItem from '@/components/CartItem.vue'
+
 export default {
   name: 'Cart',
   components: {
@@ -74,7 +76,7 @@ export default {
       return this.cart.items.reduce((acc, curVal) => {
         return acc += curVal.product.price * curVal.quantity
       }, 0)
-    }
+    },
   }
 }
 </script>
