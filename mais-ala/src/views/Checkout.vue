@@ -109,7 +109,7 @@
         <template v-if="cartTotalLength">
           <hr>
 
-          <button class="button is-dark">Pay with Stripe</button>
+          <button class="button is-dark" @click="submitForm">Pay with Stripe</button>
         </template>
       </div>
     </div>
@@ -144,11 +144,11 @@ export default {
     this.cart = this.$store.state.cart
 
     if(this.cartTotalLength > 0) {
-      this.card.mount('#card-element')
+      //this.card.mount('#card-element')
     }
   },
   methods: {
-    getiItemTotal(item) {
+    getItemTotal(item) {
       return item.quantity * item.product.price
     },
     submitForm() {
@@ -182,21 +182,10 @@ export default {
 
       if (!this.errors.length) {
         this.$store.commit('setIsLoading', true)
-
-        this.stripe.createToken(this.card).then(result => {
-          if (result.error) {
-            this.$store.commit('setIsLoading', false)
-
-            this.errors.push('Something went wrong with Stripe. Please try again')
-
-            console.log(result.error.message)
-          } else {
-            this.stripeTokenHandler(result.token)
-          }
-        })
+        this.stripeTokenHandler()
       }
     },
-    async stripeTokenHandler(token) {
+    async stripeTokenHandler() {
       const items = []
 
       for (let i = 0; i < this.cart.items.length; i++) {
@@ -219,7 +208,6 @@ export default {
         'place': this.place,
         'phone': this.phone,
         'items': this.items,
-        'stripe_token': token.id
       }
 
       await axios
